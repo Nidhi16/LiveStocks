@@ -1,0 +1,32 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <table>
+        </table>
+        <script>
+            var stocksData = {};
+            const stocksSocket = new WebSocket('ws://stocks.mnet.website');
+            stocksSocket.onmessage = function(event) {
+                var data = JSON.parse(event.data);
+                console.log(data);
+                var tickerTime = new Date();
+                data.forEach(function (value) {
+                    var tickerId = value[0];
+                    var tickerPrice = value[1];
+
+                    if (!(tickerId in stocksData)) {
+                        stocksData[tickerId] = [];
+                    }
+                    stocksData[tickerId].push({
+                        'price': tickerPrice,
+                        'time': tickerTime
+                    });
+                });
+                console.log(stocksData);
+            };
+        </script>
+    </body>
+</html>
