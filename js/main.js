@@ -19,7 +19,7 @@ stocksSocket.onmessage = function(event) {
         var change = -1;
         if (!(tickerId in stocksData)) {
             stocksData[tickerId] = [];
-            $('#stocks-display tr:last').after('<tr id="' + tickerId + '"><td>' + tickerId.toUpperCase() + '</td>' +
+            $('#stocks-display tbody').append('<tr id="' + tickerId + '"><td>' + tickerId.toUpperCase() + '</td>' +
                 '<td></td><td></td></tr>');
             change = 0;
         }
@@ -50,13 +50,11 @@ stocksSocket.onmessage = function(event) {
  * Updates the displayed timestamps of all the ticker items
  */
 var updateTimeStamps = function() {
-    $('tr').each(function(index, ticker) {
-        if (index !== 0) {
-            var tickerDateTime = $(ticker).find('td:nth-child(3)');
-            tickerDateTime.text(moment(tickerDateTime.data('date')).fromNow());
-        }
+    $('tbody tr').each(function(index, ticker) {
+        var tickerDateTime = $(ticker).find('td:nth-child(3)');
+        tickerDateTime.text(moment(tickerDateTime.data('date')).fromNow());
     });
 };
 
-// Update timestamps every 5000 milisecond
+// Update timestamps every 5000 milliseconds
 setInterval(updateTimeStamps, 5000);
