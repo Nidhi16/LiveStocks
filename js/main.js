@@ -42,7 +42,7 @@ stocksSocket.onmessage = function(event) {
         // Set the ticker time with relative time
         var tickerTimeSelector = '#' + tickerId + ' td:nth-child(3)';
         $(tickerTimeSelector).text(moment(tickerTime).fromNow());
-        $(tickerTimeSelector).data('date', tickerTime);
+        $(tickerTimeSelector).data('date', tickerTime.toISOString());
     });
 };
 
@@ -53,7 +53,6 @@ var updateTimeStamps = function() {
     $('tbody tr').each(function(index, ticker) {
         var tickerDateTime = $(ticker).find('td:nth-child(3)');
         tickerDateTime.text(moment(tickerDateTime.data('date')).fromNow());
-        tickerDateTime.data('date', tickerDateTime);
     });
 };
 
