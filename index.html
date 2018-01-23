@@ -4,29 +4,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
     <body>
-        <table>
+        <table id="stocks-display">
+            <thead>
+                <td>TICKER</td>
+                <td>Price</td>
+                <td>Last Updated</td>
+            </thead>
+            <tbody>
+            </tbody>
         </table>
-        <script>
-            var stocksData = {};
-            const stocksSocket = new WebSocket('ws://stocks.mnet.website');
-            stocksSocket.onmessage = function(event) {
-                var data = JSON.parse(event.data);
-                console.log(data);
-                var tickerTime = new Date();
-                data.forEach(function (value) {
-                    var tickerId = value[0];
-                    var tickerPrice = value[1];
-
-                    if (!(tickerId in stocksData)) {
-                        stocksData[tickerId] = [];
-                    }
-                    stocksData[tickerId].push({
-                        'price': tickerPrice,
-                        'time': tickerTime
-                    });
-                });
-                console.log(stocksData);
-            };
-        </script>
+        <script src="js/library/jquery-3.3.1.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
