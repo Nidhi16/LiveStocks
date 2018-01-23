@@ -53,6 +53,7 @@ var updateTimeStamps = function() {
     $('tbody tr').each(function(index, ticker) {
         var tickerDateTime = $(ticker).find('td:nth-child(3)');
         tickerDateTime.text(moment(tickerDateTime.data('date')).fromNow());
+        tickerDateTime.data('date', tickerDateTime);
     });
 };
 
