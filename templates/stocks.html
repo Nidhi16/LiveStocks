@@ -7,7 +7,7 @@
     <tbody>
     <tr ng-repeat="(name, stock) in stocks">
         <td>{{ name }}</td>
-        <td>{{ stock.price }}</td>
+        <td class="change-{{ stock.change }}">{{ stock.price }}</td>
         <td>{{ stock.time }}</td>
     </tr>
     </tbody>
