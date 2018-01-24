@@ -1,11 +1,13 @@
 app.factory('StocksFactory', function() {
+    // Stores the history of all the data
     var stocksData = {};
-    var factory ={};
+    var factory = {};
     factory.stocksCurrentPrices = {};
 
     // Local copy of the stock current prices
     var stocksCurrentPrices = {};
 
+    // Subscribe to the websocket for stock prices
     const stocksSocket = new WebSocket('ws://stocks.mnet.website');
     stocksSocket.onmessage = function(event) {
         var tickerTime = new Date();  // // Time of the data update
@@ -34,9 +36,9 @@ app.factory('StocksFactory', function() {
             };
             // Adding for history
             stocksData[tickerId].push(thisStockData);
+
             // Adding to current prices
             stocksCurrentPrices[tickerId] = thisStockData;
-
             // Live update the values in the factory
             angular.copy(stocksCurrentPrices, factory.stocksCurrentPrices);
         });
