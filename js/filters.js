@@ -1,5 +1,5 @@
 app.filter('fromNow', function() {
-    return function(date) {
-        return moment(date).fromNow();
+    return function(time) {
+        return moment(time).fromNow();
     };
 });

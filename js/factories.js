@@ -10,7 +10,7 @@ app.factory('StocksFactory', function() {
     // Subscribe to the websocket for stock prices
     const stocksSocket = new WebSocket('ws://stocks.mnet.website');
     stocksSocket.onmessage = function(event) {
-        var tickerTime = new Date().toISOString();  // // Time of the data update
+        var tickerTime = new Date();  // // Time of the data update
         var data = JSON.parse(event.data);
 
         data.forEach(function (value) {
