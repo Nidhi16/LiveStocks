@@ -10,5 +10,3 @@ app.config(function($routeProvider) {
         })
         .otherwise({redirectTo: '/stocks'});
 });
-
-console.log('app.js');
