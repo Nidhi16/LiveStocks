@@ -4,9 +4,6 @@ app.factory('StocksFactory', function() {
     var factory = {};
     factory.stocksCurrentPrices = {};
 
-    // Local copy of the stock current prices
-    var stocksCurrentPrices = {};
-
     // Subscribe to the websocket for stock prices
     const stocksSocket = new WebSocket('ws://stocks.mnet.website');
     stocksSocket.onmessage = function(event) {
@@ -20,7 +17,7 @@ app.factory('StocksFactory', function() {
             var change = -1;
             if (!(tickerId in stocksData)) {
                 stocksData[tickerId] = [];
-                stocksCurrentPrices[tickerId] = {};
+                factory.stocksCurrentPrices[tickerId] = {};
                 change = 0;
             }
             if (change !== 0) {
@@ -38,9 +35,7 @@ app.factory('StocksFactory', function() {
             stocksData[tickerId].push(thisStockData);
 
             // Adding to current prices
-            stocksCurrentPrices[tickerId] = thisStockData;
-            // Live update the values in the factory
-            angular.copy(stocksCurrentPrices, factory.stocksCurrentPrices);
+            factory.stocksCurrentPrices[tickerId] = thisStockData;
         });
     };
 
