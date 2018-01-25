@@ -1,4 +1,4 @@
-app.factory('StocksFactory', function() {
+app.factory('StocksFactory', function($rootScope, $timeout) {
     // Stores the history of all the data
     var stocksData = {};
     var factory = {};
@@ -36,6 +36,11 @@ app.factory('StocksFactory', function() {
 
             // Adding to current prices
             factory.stocksCurrentPrices[tickerId] = thisStockData;
+
+            // Notify of changes
+            $timeout(function() {
+                $rootScope.$broadcast();
+            });
         });
     };
 
