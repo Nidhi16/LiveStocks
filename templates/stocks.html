@@ -1,0 +1,14 @@
+<table id="stocks-display">
+    <thead>
+    <td>TICKER</td>
+    <td>Price</td>
+    <td>Last Updated</td>
+    </thead>
+    <tbody>
+    <tr ng-repeat="(name, stock) in stocks">
+        <td>{{ name }}</td>
+        <td class="change-{{ stock.change }}">{{ stock.price }}</td>
+        <td>{{ stock.time | date : 'yyyy-MM-ddTHH:mm:ss.sss' | fromNow }}</td>
+    </tr>
+    </tbody>
+</table>
