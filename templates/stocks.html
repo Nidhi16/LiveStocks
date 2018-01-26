@@ -6,7 +6,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="(name, stock) in stocks">
-        <td>{{ name }}</td>
+        <td><a href="#!/stock/{{ name }}">{{ name }}</a></td>
         <td class="change-{{ stock.change }}">{{ stock.price }}</td>
         <td>{{ stock.time | date : 'yyyy-MM-ddTHH:mm:ss.sss' | fromNow }}</td>
     </tr>
