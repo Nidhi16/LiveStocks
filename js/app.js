@@ -8,5 +8,9 @@ app.config(function($routeProvider) {
             controller: 'StocksController',
             templateUrl: '/templates/stocks.html'
         })
+        .when('/stock/:stockId', {
+            controller:'SingleStockController',
+            templateUrl:'/templates/single_stock.html'
+        })
         .otherwise({redirectTo: '/stocks'});
 });

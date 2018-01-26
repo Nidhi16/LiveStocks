@@ -44,5 +44,13 @@ app.factory('StocksFactory', function($rootScope, $timeout) {
         });
     };
 
+    factory.stockCurrentPrice = function(stockId) {
+        return factory.stocksCurrentPrices[stockId];
+    };
+
+    factory.stockHistory = function(stockId) {
+        return stocksData[stockId];
+    };
+
     return factory;
 });

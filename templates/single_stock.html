@@ -1,0 +1,8 @@
+<div>
+    <h1>Stock : <strong>{{ stockId }}</strong></h1>
+    <p>
+        <span class="change-{{ stockData(stockId).change }}">{{ stockData(stockId).price }}</span>
+        <span>{{ stockData(stockId).time | date : 'yyyy-MM-ddTHH:mm:ss.sss' | fromNow }}</span>
+    </p>
+    {{ stockHistory(stockId) }}
+</div>
