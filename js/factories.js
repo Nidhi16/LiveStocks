@@ -6,6 +6,10 @@ app.factory('StocksFactory', function($rootScope, $timeout) {
 
     // Subscribe to the websocket for stock prices
     const stocksSocket = new WebSocket('ws://stocks.mnet.website');
+    /**
+     * Handles every time new data comes
+     * @param event
+     */
     stocksSocket.onmessage = function(event) {
         var tickerTime = new Date();  // // Time of the data update
         var data = JSON.parse(event.data);
@@ -38,18 +42,53 @@ app.factory('StocksFactory', function($rootScope, $timeout) {
             factory.stocksCurrentPrices[tickerId] = thisStockData;
 
             // Notify of changes
-            $timeout(function() {
-                $rootScope.$broadcast();
-            });
+            $rootScope.$broadcast('stocks-changed');
         });
     };
 
+    /**
+     * Returns stock's current data
+     * @param stockId
+     * @returns {'price': tickerPrice,
+                'time': tickerTime,
+                'change': change}
+     */
     factory.stockCurrentPrice = function(stockId) {
         return factory.stocksCurrentPrices[stockId];
     };
 
-    factory.stockHistory = function(stockId) {
-        return stocksData[stockId];
+    /**
+     * Returns last (length) changes of stock
+     * @param stockId
+     * @param length
+     * @returns {Array} list of stock changes
+     */
+    var stocksRecentData = function(stockId, length) {
+        var thisStockHistory = stocksData[stockId];
+        if (!thisStockHistory) {
+            return [];
+        }
+        if (thisStockHistory.length > length) {
+            thisStockHistory.splice(0, thisStockHistory.length - length);
+        }
+        return thisStockHistory;
+    };
+
+    /**
+     * Returns list of recent changes(type) of stock
+     * @param stockId
+     * @param type
+     * @returns {Array} of (type) changes
+     */
+    factory.recentStockHistory = function(stockId, type) {
+        var recentStocks = stocksRecentData(stockId, 20);
+        var data = [];
+        recentStocks.forEach(function(stockData) {
+            var item = stockData[type];
+            item = type === 'time' ? moment(item).format('H:mm:ss') : item;
+            data.push(item);
+        });
+        return data;
     };
 
     return factory;

@@ -4,5 +4,7 @@
         <span class="change-{{ stockData(stockId).change }}">{{ stockData(stockId).price }}</span>
         <span>{{ stockData(stockId).time | date : 'yyyy-MM-ddTHH:mm:ss.sss' | fromNow }}</span>
     </p>
-    {{ stockHistory(stockId) }}
+    <div id="stock-chart" >
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+    </div>
 </div>
