@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module('liveStocksApp', ['ngRoute']);
+var app = angular.module('liveStocksApp', ['ngRoute', 'chart.js']);
 
 app.config(function($routeProvider) {
     $routeProvider
