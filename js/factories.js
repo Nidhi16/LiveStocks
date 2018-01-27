@@ -1,4 +1,6 @@
-app.factory('StocksFactory', function($rootScope, $timeout) {
+"use strict";
+
+app.factory('StocksFactory', function($rootScope) {
     // Stores the history of all the data
     var stocksData = {};
     var factory = {};

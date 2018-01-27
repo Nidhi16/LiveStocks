@@ -1,3 +1,5 @@
+"use strict";
+
 app.controller('StocksController', function($scope, $timeout, StocksFactory) {
 
     $scope.stocks = StocksFactory.stocksCurrentPrices;
